@@ -1,0 +1,33 @@
+(define (sum a b)
+  (if (> a b)
+      0
+      (+ a
+         (sum (+ a 1) b))))
+         
+         
+(define (pi-sum b)
+  (define (lc-pi-sum x y)
+    (if (> x y)
+        0
+        (+ (- (/ 1.0 x)
+              (/ 1.0 (+ x 2)))
+           (lc-pi-sum (+ x 4) y))))
+  (* 4 (lc-pi-sum 1 b)))
+         
+
+(define (general-sum term a next b)
+  (if (> a b)
+      0
+      (+ (term a)
+         (general-sum term (next a) next b))))
+         
+(general-sum (lambda (x) x)
+             1
+             (lambda (y) (+ y 1))
+             100)
+
+(define (pi-sum b)             
+(general-sum (lambda (x) x)
+             1
+             (lambda (y) (+ y 1))
+             100)
