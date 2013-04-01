@@ -1,7 +1,0 @@
-; This is a implementation of general-sum 
-
-(define (general-sum term a next b)
-  (if (> a b)
-      0
-      (+ (term a)
-         (general-sum term (next a) next b))))
