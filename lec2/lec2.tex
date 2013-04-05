@@ -1,8 +1,17 @@
 \documentclass[12pt,a4paper]{ctexrep}
 \setCJKmainfont{AR PL UKai CN}
 \setCJKmonofont{AR PL UKai CN}
+\usepackage{amsthm}
+\usepackage{amsmath}
 \title{计算理论与函数式编程简介}
 \author{曹竞帆}
+\theoremstyle{definition}
+\newtheorem{rf}{Primitive Recursion Function}
+\newtheorem{con}[rf]{常数函数}
+\newtheorem{suc}[rf]{后继函数}
+\newtheorem{pro}[rf]{投影函数}
+\newtheorem{com}[rf]{复合算子}
+\newtheorem{pri}[rf]{原始递归算子}
 
 \begin{document}
 \date{}
@@ -112,9 +121,88 @@
 
 \subsection{形式化可计算函数}
 
+希尔伯特第十问题-----丢番图方程可解性问题-----以及后来的希尔伯特计划中的可判定性问题都促使
+数学家们思考这样一个问题：
+
+\begin{quote}
+能否找到一种方法，仅仅通过机械化的计算，就能判定某个数学陈述是对是错？
+也即数学证明能否机械化？
+\end{quote}
+
+因为哥德尔的工作已经证明数学在形式化中的本质缺陷，
+数学家们将可判定性问题视为数学的“最后尊严”，并试图通过给出这个问题一个肯定的回答
+来维护数学的崇高地位。
+
+数学家们首先要做的是将“可计算”这个概念形式化。
+因为要解决可判定问题，核心任务是要提出算法，十分明确毫不含糊的算法，
+而算法是用来计算函数的，于是首先需要解决的问题是-----
+什么是有效可计算的函数？也即算法可计算的函数？
+
+虽然你可能非常惊讶，但我还是要说，递归函数在可计算理论中扮演核心问题的角色，
+甚至在可计算理论发源的那个时期，计算理论不叫计算理论，就叫递归函数理论。
+
+递归在数学上首要的意义是“用归纳来定义”，或者说得绕口一点“用递归来定义”。
+以我们目前的理解来非形式化地描述递归函数
+就是说在一个函数$f$关于参数$x$的定义中需要用到之前的$f$的关于参数$y$的定义，或者说
+在函数$f$的定义中需要用到已经定义的$g$函数。
+
+\paragraph{一般可递归函数}
+
+又称$\mu$-递归函数，是哥德尔在海尔勃朗研究的基础上提出的概念，虽然哥德尔本人
+当时并未意识到这个概念的一般性。
+
+递归函数有关于原始递归函数，并且它们的归纳定义建造在原始递归函数之上。
+但是，不是所有递归函数都是原始递归函数-----最著名的这种函数是阿克曼函数。
+简单来说整个定义包含三个原始递归函数与三个基本操作，
+这样就能描述所有的算法可计算函数。
+
+\begin{con}
+对于每个自然数$n$和所有的$k$都有：
+\begin{equation}
+f(x_1,x_2,\ldots,x_k)=n
+\end{equation}
+\end{con}
+
+\begin{suc}
+从已知的对象$n$到另一个对象$n+1$或$n$的后继：
+\begin{equation}
+S(x)\stackrel{def}{=}f(x)=x+1
+\end{equation}
+\end{suc}
+
+\begin{pro}[亦称恒等函数]
+对于所有自然数$i,k(1\leq i \leq k)$使得：
+\begin{equation}
+P^k_i(x_1,x_2,\ldots,x_k) \stackrel{def}{=}f(x_1,x_2,\ldots,x_k)=x_i
+\end{equation}
+\end{pro}
+
+\begin{com}
+接受一个m元函数$h(x_1,x_2,\ldots,x_m)$以及m个k元函数$g_1(x_1,\ldots,x_k),\ldots,g_m(x_1,x_2,\ldots,x_k)$，
+返回复合函数$f$：
+\begin{equation}
+f(x_1,x_2,\ldots,x_k) \stackrel{def}{=}h(g_1(x_1,\ldots,x_k),\ldots,g_m(x_1,x_2,\ldots,x_k))
+\end{equation}
+\end{com}
+
+\begin{pri}
+接受一个k元函数$g(x_1,x_2,\ldots,x_k)$以及一个k+2元函数$h(y,z,x_1,\ldots,x_m)$，
+返回唯一的函数$f$使得：
+\begin{equation}
+\begin{split}
+f(0,x_1,\ldots,x_k) = g(x_1,x_2,\ldots,x_k)\\
+f(y+1,x_1,\ldots,x_k) = h(y,f(y,x_1,\ldots,x_k),x_1,\ldots,x_k)
+\end{split}
+\end{equation}
+\end{pri}
+
+比如，加法可以这样定义：%未完待续
 
 \subsection{图灵的把戏}
 
+虽然哥德尔的$\mu$-递归函数成功地解决了什么是算法可计算函数这个问题，但是
+
+\chapter{Labmda演算}
 \chapter{函数式编程}
 
 \chapter{Why and Why NOT Lisp?}
@@ -123,6 +211,7 @@
 \bibitem{face} 玑衡,2012.面对面的办公室-----纪念艾伦•图灵百年诞辰.豆瓣网
 \bibitem{tenth} 卢昌海,2005.Hilbert第十问题漫谈（上）.卢昌海的个人主页
 \bibitem{dream} 方弦,2009.希尔伯特之梦，以及梦的破灭.科学松鼠会
+\bibitem{recur} Robert I. Soare,1996.Computability and Recursion.Bull. Symbolic Logic Volume 2,Number 3(1996),284-321.
 \end{thebibliography}
 
 \end{document}
