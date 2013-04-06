@@ -12,6 +12,7 @@
 \newtheorem{pro}[rf]{投影函数}
 \newtheorem{com}[rf]{复合算子}
 \newtheorem{pri}[rf]{原始递归算子}
+\newtheorem{tm}{图灵机}
 
 \begin{document}
 \date{}
@@ -196,11 +197,38 @@ f(y+1,x_1,\ldots,x_k) = h(y,f(y,x_1,\ldots,x_k),x_1,\ldots,x_k)
 \end{equation}
 \end{pri}
 
-比如，加法可以这样定义：%未完待续
+比如，加法可以这样定义：
+
 
 \subsection{图灵的把戏}
 
-虽然哥德尔的$\mu$-递归函数成功地解决了什么是算法可计算函数这个问题，但是
+虽然哥德尔的$\mu$-递归函数成功地解决了什么是算法可计算函数这个问题，
+但是其最大的问题就是不够简洁，也即人类思维活动参与度较高。
+比如刚才一个简单的加法定义就足够复杂了。
+
+要明确的是$\mu$-递归函数并不是唯一的可以用于定义算法可计算函数的概念。
+还有别的方式比如谓词演算，以及下面将要讲到的图灵机可计算函数与
+$\lambda$可定义函数。
+
+下面介绍的这个“简单”的概念-----图灵机-----同样定义了算法可计算函数，
+并且它足够简单，并最先解决了希尔伯特可判定问题。
+
+\begin{tm}
+形式化地，图灵机是一个7元组：
+\begin{equation}
+M=(Q,\Sigma,\Gamma,\sigma,q_0,B,F)
+\end{equation}
+其中：
+
+$Q$：控制状态的有穷集合。
+
+$\Sigma$：输入符号的有穷集合。
+
+$\Gamma$：带符号的完整集合，$\Sigma$总是$\Gamma$的子集。
+
+$\sigma$：转移函数
+
+\end{tm}
 
 \chapter{Labmda演算}
 \chapter{函数式编程}
